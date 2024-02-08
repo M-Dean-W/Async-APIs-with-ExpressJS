@@ -33,6 +33,7 @@ router.post("/", async (req, res) => {
 router.put("/:id?", async (req, res) => {
     try {
         const id = parseInt(req.params.id)
+        const { text, username } = req.body
         const editChirp = await chirpStore.UpdateChirp(id, { text, username })
         res.json(editChirp)
     } catch (error) {
