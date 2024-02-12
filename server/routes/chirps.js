@@ -11,7 +11,12 @@ router.get("/:id?", async (req, res) => {
             res.json(chirp)
         }else{
         const chirps = await chirpStore.GetChirps()
-        res.json(chirps)}
+        delete chirps.nextid
+        const updatedChirps = await Object.keys(chirps).map(id =>{
+            const chirp = chirps[id]
+            return{...chirp, id}
+        })
+        res.json(updatedChirps)}
 
     } catch (error) {
         console.log(error)
